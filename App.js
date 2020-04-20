@@ -1,12 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import MainNavigator from './src/navigators/MainNavigator';
+
+//Fonts
+import { AppLoading } from 'expo';
+import * as Fonts from 'expo-font'
+//Loading Fonts
+const fetchFonts = () => {
+	return Fonts.loadAsync({
+		'open-sans': require('../../assets/fonts/OpenSans-Regular.ttf'),
+		'open-sans-bold': require('../../assets/fonts/OpenSans-Bold.ttf')
+	})
+};
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  if (!fontLoaded) {
+   return (
+    <AppLoading
+     startAsync={fetchFonts}
+     onFinish={() => setFontLoaded(true)}
+     onError={(error) => console.log(error)}
+    />
+   );
+  }
+
+  
+  return
+  <MainNavigator />
 }
 
 const styles = StyleSheet.create({
