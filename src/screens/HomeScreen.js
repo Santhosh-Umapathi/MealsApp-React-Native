@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Button } from 'react-native';
+
+import {CATEGORIES} from '../data/dummy-data';
 
 
 const HomeScreen = ({navigation}) =>
@@ -7,23 +9,38 @@ const HomeScreen = ({navigation}) =>
 
 	return (
 		<View style={styles.containerView}>
-			<Text style={styles.text}>HomeScreen</Text>
+			<FlatList
+				numColumns={2}
+				data={CATEGORIES}
+				keyExtractor={key => key.id}
+				renderItem={({item}) => 
+				{
+					return (
+					<View style={styles.flatListView}>
+						<Text>{item.title}</Text>
+					</View>
+     			);}}
+			/>
 		</View>
 		);
 };
 
 const styles = StyleSheet.create({
-	containerView:
+ containerView: {
+  flex: 1,
+  backgroundColor: "#fff",
+  justifyContent: "center",
+ },
+ text: {
+  fontSize: 30,
+ },
+	flatListView:
 	{
 		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
+		margin: 15,
 		justifyContent: 'center',
-	},
-	text: 
-	{
-		fontSize: 30,
-	},
+		height: 100
+	}
 });
 
 export default HomeScreen;

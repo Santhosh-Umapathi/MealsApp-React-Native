@@ -1,10 +1,10 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import HomeScreen from "./src/screens/HomeScreen";
-import CategoryMealsScreen from "./src/screens/CategoryMealsScreen";
-import FavoritesScreen from "./src/screens/FavoritesScreen";
-import FiltersScreen from "./src/screens/FiltersScreen";
-import MealsDetailScreen from "./src/screens/MealsDetailScreen";
+import HomeScreen from "../screens/HomeScreen";
+import CategoryMealsScreen from "../screens/CategoryMealsScreen";
+import FavoritesScreen from "../screens/FavoritesScreen";
+import FiltersScreen from "../screens/FiltersScreen";
+import MealsDetailScreen from "../screens/MealsDetailScreen";
 
 
 const MainNavigator = createStackNavigator(
