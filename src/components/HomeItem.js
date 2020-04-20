@@ -28,33 +28,31 @@ const HomeItem = ({tapped, bgColor, title}) =>
 
 const styles = StyleSheet.create({
  containerView: {
-	flex: 1,
-	borderRadius:10,
-	overflow: 'hidden',
-	margin: 15,
-	 
+  flex: 1,
+  borderRadius: 10,
+  overflow:
+   Platform.OS === "android" && Platform.Version >= 21 ? "hidden" : "visible",
+  margin: 15,
+  elevation: 15,
  },
  text: {
-	 fontSize: 20,
-	 fontFamily: 'open-sans',
-	 textAlign: 'right',
-	 
+  fontSize: 20,
+  fontFamily: "open-sans",
+  textAlign: "right",
  },
  flatListView: {
   flex: 1,
   borderRadius: 10,
   shadowColor: "grey",
   shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.25,
-	 shadowRadius: 10,
-	 elevation: 5,
-	 justifyContent: 'flex-end',
-	 alignItems: 'flex-end',
-	 paddingVertical: 10,
-	 paddingHorizontal:10,
-	 height: 150,
-	 paddingRight: 10,
-	 
+  shadowOpacity: 0.55,
+  shadowRadius: 10,
+  justifyContent: "flex-end",
+  alignItems: "flex-end",
+  paddingVertical: 10,
+  paddingHorizontal: 10,
+  height: 150,
+  paddingRight: 10,
  },
 });
 

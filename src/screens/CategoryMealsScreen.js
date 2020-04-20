@@ -28,7 +28,7 @@ const CategoryMealsScreen = ({ navigation }) => {
     renderItem={({ item }) => {
 		return (
    <MealItem
-    tapped={() => navigation.navigate("Detail", { mealID: item.id })}
+    tapped={() => navigation.navigate("Detail", { mealID: item.id, categoryID: id })}
     image={item.imageURL}
     title={item.title}
     duration={item.duration}
