@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import MainNavigator from './src/navigation/MainNavigator';
 
+import { useScreens, enableScreens } from 'react-native-screens';
+enableScreens();
 //Fonts
 import { AppLoading } from 'expo';
 import * as Fonts from 'expo-font'
