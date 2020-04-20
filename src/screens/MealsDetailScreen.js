@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button  } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+
+import {MEALS} from '../data/dummy-data';
 
 const MealsDetailScreen = ({navigation}) =>
 {
+	const mealID = navigation.getParam('mealID')
 
+	const selectedMeal = MEALS.find((meal) => meal.id === mealID);
+	
 
 	return (
 		<View style={styles.containerView}>
-			<Text style={styles.text}>MealsDetailScreen</Text>
+			<Text> {selectedMeal.title}</Text>
 		</View>
 		);
 };

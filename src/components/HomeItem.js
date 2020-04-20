@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Button, Platform, TouchableNativeFeedback  } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, TouchableNativeFeedback } from 'react-native';
 
-const MealsItem = ({tapped, bgColor, title}) =>
+const HomeItem = ({tapped, bgColor, title}) =>
 {
 
 	let ButtonComp = TouchableOpacity;
@@ -15,9 +15,8 @@ const MealsItem = ({tapped, bgColor, title}) =>
   <View style={styles.containerView}>
    <ButtonComp
 		onPress={tapped}
-		//style={{flex: 1, borderRadius:10,}}
    >
-			<View style={[styles.flatListView,{backgroundColor: bgColor,}]}>
+	<View style={[styles.flatListView,{backgroundColor: bgColor,}]}>
      <Text style={styles.text} numberOfLines={2}>
       {title}
      </Text>
@@ -29,10 +28,10 @@ const MealsItem = ({tapped, bgColor, title}) =>
 
 const styles = StyleSheet.create({
  containerView: {
-		flex: 1,
-	 borderRadius:10,
-		overflow: 'hidden',
-	 margin: 15,
+	flex: 1,
+	borderRadius:10,
+	overflow: 'hidden',
+	margin: 15,
 	 
  },
  text: {
@@ -59,4 +58,4 @@ const styles = StyleSheet.create({
  },
 });
 
-export default MealsItem;
+export default HomeItem;

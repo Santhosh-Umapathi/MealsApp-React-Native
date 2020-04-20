@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {
  View,
- Text,
  FlatList,
- StyleSheet,
- TouchableOpacity,
- Button,
+ StyleSheet
 } from "react-native";
 
 import { CATEGORIES } from "../data/dummy-data";
-import MealsItem from "../components/MealsItem";
+import HomeItem from "../components/HomeItem";
 
 const HomeScreen = ({ navigation }) => {
  return (
@@ -20,11 +17,11 @@ const HomeScreen = ({ navigation }) => {
     keyExtractor={(key) => key.id}
     renderItem={({ item }) => {
      return (
-         <MealsItem
-             tapped={() => { navigation.navigate("Category", { id: item.id }) }}
-             bgColor={item.color} 
-             title = {item.title}
-         />
+      <HomeItem
+       tapped={() => {navigation.navigate("Category", { id: item.id })}}
+       bgColor={item.color}
+       title={item.title}
+      />
      );
     }}
    />
@@ -36,8 +33,6 @@ const styles = StyleSheet.create({
  containerView: {
   flex: 1,
  },
- 
- 
 });
 
 export default HomeScreen;
