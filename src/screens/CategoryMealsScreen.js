@@ -5,10 +5,17 @@ import {
  StyleSheet
 } from "react-native";
 
-import { CATEGORIES, MEALS } from "../data/dummy-data";
+import { useSelector } from 'react-redux';
+
+import { CATEGORIES } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
 
+
 const CategoryMealsScreen = ({ navigation }) => {
+
+    const MEALS = useSelector((state) => state.MealsReducer.filteredMeals);
+
+
  const id = navigation.getParam("id");
 
  const seletedCategoryMeals = MEALS.filter(
@@ -16,6 +23,8 @@ const CategoryMealsScreen = ({ navigation }) => {
  );
 
  //const seletedCategoryMeals = MEALS.filter((meal) => meal.categoryIds.includes(id)); //Both works
+  
+
 
  return (
   <View style={styles.containerView}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import {
  View,
  Text,
@@ -11,19 +11,38 @@ import {
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/Buttons/FavoritesButton";
 
-import { CATEGORIES, MEALS } from "../data/dummy-data";
+import { CATEGORIES } from "../data/dummy-data";
+
+import { useSelector, useDispatch } from "react-redux";
+import { toggleFavorite } from "../store/actions/meals";
+
 
 const MealsDetailScreen = ({ navigation }) => {
 	const mealID = navigation.getParam("mealID");
-	 const categoryID = navigation.getParam("categoryID");
 
-	
-	 const seletedCategory = CATEGORIES.find(
+    const MEALS = useSelector((state) => state.MealsReducer.meals);
+
+
+    const dispatch = useDispatch();
+
+    const toggleFavoriteHandler = useCallback(() => {
+     dispatch(toggleFavorite(mealID));
+    }, [dispatch, mealID]);
+
+    useEffect(() => {
+     // props.navigation.setParams({ mealTitle: selectedMeal.title });
+     navigation.setParams({ toggleFav: toggleFavoriteHandler });
+    }, [toggleFavoriteHandler]);
+
+
+
+	const categoryID = navigation.getParam("categoryID");
+    
+    const seletedCategory = CATEGORIES.find(
    (categories) => categories.id === categoryID
   );
 
-
- const selectedMeal = MEALS.find((meal) => meal.id === mealID);
+    const selectedMeal = MEALS.find((meal) => meal.id === mealID);
 
  return (
   <ScrollView style={styles.containerView}>
@@ -74,19 +93,20 @@ MealsDetailScreen.navigationOptions = ({ navigation }) => {
  const seletedCategory = CATEGORIES.find((categories) => categories.id === categoryID);
 
  return {
-  headerTitle: seletedCategory.title,
-  headerTintColor: "black", //Header button colors
-  headerStyle: {
-   backgroundColor: seletedCategory.color, // header bg color
-  },
-  headerRight: () => (
-   <HeaderButtons HeaderButtonComponent={HeaderButton}>
-    <Item
-     title="favorites"
-     iconName="ios-star"
-     onPress={() => navigation.navigate("Favorites")}
-    />
-   </HeaderButtons>
+    headerTitle: seletedCategory.title,
+    headerTintColor: "black", //Header button colors
+    headerStyle:
+    {
+        backgroundColor: seletedCategory.color, // header bg color
+    },
+    headerRight: () => (
+    <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+            title="favorites"
+            iconName="ios-star"
+            onPress={navigation.getParam('toggleFav')}
+        />
+    </HeaderButtons>
   ),
  };
 };

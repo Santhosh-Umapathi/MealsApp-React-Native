@@ -1,18 +1,20 @@
 import React from 'react';
 import { View, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
-import { MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
+import { useSelector } from "react-redux";
+
 
 const FavoritesScreen = ({navigation}) =>
 {
 
-	const seletedCategoryMeals = MEALS.filter( meal => meal.id === 'm1' || meal.id === 'm2');
+    const MEALS = useSelector((state) => state.MealsReducer.favoriteMeals);
+
 
 	return (
   <View style={styles.containerView}>
    <FlatList
-    data={seletedCategoryMeals}
+    data={MEALS}
     keyExtractor={(key) => key.id}
     renderItem={({ item }) => {
      return (
