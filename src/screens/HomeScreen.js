@@ -2,8 +2,11 @@ import React from "react";
 import {
  View,
  FlatList,
- StyleSheet
+    StyleSheet,
+ TouchableOpacity
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
 
 import { CATEGORIES } from "../data/dummy-data";
 import HomeItem from "../components/HomeItem";
@@ -27,6 +30,21 @@ const HomeScreen = ({ navigation }) => {
    />
   </View>
  );
+};
+
+HomeScreen.navigationOptions = ({ navigation }) => {
+ return {
+  headerLeft: () => (
+   <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+    <Ionicons
+     name="ios-menu"
+     size={25}
+     color="white"
+     style={{ marginLeft: 15 }}
+    />
+   </TouchableOpacity>
+  ),
+ };
 };
 
 const styles = StyleSheet.create({

@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import {
  View,
- Text,
  FlatList,
- StyleSheet,
- TouchableOpacity,
- ImageBackground,
+ StyleSheet
 } from "react-native";
 
 import { CATEGORIES, MEALS } from "../data/dummy-data";

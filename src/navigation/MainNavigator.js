@@ -4,6 +4,8 @@ import { createStackNavigator } from "react-navigation-stack";
 //Tab Bars
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+//Side Drawer
+import {createDrawerNavigator} from "react-navigation-drawer";
 
 //Screens
 import HomeScreen from "../screens/HomeScreen";
@@ -18,7 +20,7 @@ import { Platform } from 'react-native';
 
 const defaultNavOptions = 
 {
-        title: "Home",
+        //title: "Home",
         headerTintColor: "white", //Header button colors
         headerStyle:
         {
@@ -31,11 +33,10 @@ const defaultNavOptions =
 }
 
 //Stack Navigators
-const MainNavigator = createStackNavigator(
+const HomeNavigator = createStackNavigator(
 {
     Home: HomeScreen,
     Category: CategoryMealsScreen,
-    Filter: FiltersScreen,
     Detail: MealsDetailScreen,
 },
 {
@@ -52,6 +53,12 @@ const FavoritesNavigator = createStackNavigator(
     defaultNavigationOptions: defaultNavOptions   
 });
 
+const FilterNavigator = createStackNavigator({
+    Filter: FiltersScreen,
+},
+{
+    defaultNavigationOptions: defaultNavOptions
+});
 
 
 //Bottom Tabs Android | iOS
@@ -59,7 +66,7 @@ const BottomNavigator =
  Platform.OS === "android"
     ? createMaterialBottomTabNavigator( //Android
         {
-            MainNavigator,
+            HomeNavigator,
             FavoritesNavigator
         },
         {
@@ -68,7 +75,7 @@ const BottomNavigator =
         })
     : createBottomTabNavigator( //iOS
     {
-        MainNavigator, //Meals: MainNavigator same
+        HomeNavigator, //Meals: HomeNavigator same
         FavoritesNavigator
     },
     {
@@ -77,10 +84,15 @@ const BottomNavigator =
             activeTintColor: "orange",
             //activeBackgroundColor:'yellow'
         },
-    });
+        });
+    
+const MainNavigator = createDrawerNavigator({
+    Home: BottomNavigator,
+    Filter: FilterNavigator,
+})
 
 //Tab Bar Icon Config
-MainNavigator.navigationOptions = {
+HomeNavigator.navigationOptions = {
     title: "Home",
     tabBarIcon: <Ionicons name="ios-restaurant" size={20} color="orange" />,
     //tabBarColor: "lightgreen", //Only for android
@@ -97,4 +109,5 @@ FavoritesNavigator.navigationOptions = {
 
 
 
-export default createAppContainer(BottomNavigator);
+
+export default createAppContainer(MainNavigator);
