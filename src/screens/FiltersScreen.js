@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
  View,
  Text,
@@ -35,6 +35,21 @@ const FiltersScreen = ({navigation}) =>
 	const [isVegan, setisVegan] = useState(false);
 	const [isVegetarian, setisVegetarian] = useState(false);
 
+
+	const saveFilters = useCallback(() => {
+		const savedValues = {
+			isGlutenFree: isGlutenFree,
+			isLactoseFree: isLactoseFree,
+			isVegan: isVegan,
+			isVegetarian: isVegetarian
+		}
+		
+		console.log(savedValues)
+	}, [isGlutenFree, isLactoseFree, isVegetarian, isVegetarian]);
+
+	useEffect(() => {
+		navigation.setParams({save: saveFilters})
+	}, [saveFilters])
 
 	return (
   <View style={styles.containerView}>
@@ -76,6 +91,16 @@ FiltersScreen.navigationOptions = ({ navigation }) => {
      size={25}
      color="white"
      style={{ marginLeft: 15 }}
+    />
+   </TouchableOpacity>
+  ),
+  headerRight: () => (
+   <TouchableOpacity onPress={navigation.getParam("save")}>
+    <Ionicons
+     name="ios-save"
+     size={25}
+     color="white"
+     style={{ marginRight: 15 }}
     />
    </TouchableOpacity>
   ),
